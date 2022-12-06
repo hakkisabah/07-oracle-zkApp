@@ -6,6 +6,12 @@ Its no require a server to run, its a serverless application for require request
 
 We use and configure on Lambda of AWS.
 
+Test to example of current project with this url : https://3zfeebofnm6yarifpd6jb7hkd40dkxtt.lambda-url.eu-central-1.on.aws
+
+
+and jump to EXAMPLE SECTION with url : https://github.com/hakkisabah/07-oracle-zkApp/tree/main/oracle#example-requests-
+
+
 
 PRE REQUIREMENTS
 -
