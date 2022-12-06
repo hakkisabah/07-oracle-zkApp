@@ -47,7 +47,7 @@ if you wanto zip with CLI command(in oracle folder) :
 
 Create role for lambda function
 ---
-AWS role crate url = https://us-east-1.console.aws.amazon.com/iamv2/home#/roles
+AWS role crate url = https://console.aws.amazon.com/iamv2/home#/roles
 
 1. create role
 2. select AWS service
