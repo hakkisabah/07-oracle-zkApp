@@ -9,7 +9,7 @@ async function processBase({userId, score}) {
   // be used. In production the key will be loaded from a Vercel environment
   // variable.
   const privateKey = PrivateKey.fromBase58(
-    process.env.PRIVATE_KEY
+    process.env.PRIVATE_KEY || require("./serverenv.json").Variables.PRIVATE_KEY
   );
 
   // We get the users credit score. In this case it's 787 for user 1, and 536

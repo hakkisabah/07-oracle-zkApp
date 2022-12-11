@@ -29,6 +29,8 @@ PREPARE WITH NPM (use node version 16.x)
 -  run `npm run keygen` command and get the generated keys with  from the console prints and save keys to serverenv.json.
 - run `npm install` and follow the other instructions below.
 
+### NOTE : If serverenv.json file is ok, you can run the application with `npm run dev` command for development mode.
+
 AWS CONFIGURATION & DEPLOY
 -
 Aws cli
