@@ -4,7 +4,7 @@ Its so complicated and hard for me some bugs or development but i do this !! tha
 
 Explanation
 -
-#### PS : If you want to see live demo, you can visit [https://hakkisabah.github.io/07-oracle-zkApp/index.html](https://hakkisabah.github.io/07-oracle-zkApp/index.html/)
+#### PS : If you want to see live demo, you can visit [https://hakkisabah.github.io/07-oracle-zkApp/index.html](https://hakkisabah.github.io/07-oracle-zkApp/index.html)
 
 This repo have 3 folder contract, oracle and zkApp-Vue-Frontend.
 
