@@ -1,11 +1,18 @@
 const getScore = require("./getScore.js");
 const setScore = require("./setScore.js");
 
+// const headers = {
+//   "Access-Control-Allow-Headers": "Content-Type",
+//   "Access-Control-Allow-Origin" : "*",
+//   "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+// }
+
 const getHandler = async(id) => {
   // TODO implement
   console.log("getHandler id value",id);
   return {
     statusCode: 200,
+    // headers,
     body: await getScore(id)
   };
 };
@@ -15,6 +22,7 @@ const postHandler = async (body) => {
   console.log("setHandler score body",body);
   return {
     statusCode: 200,
+    // headers,
     body: await setScore(body)
   };
 };
