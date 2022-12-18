@@ -29,8 +29,12 @@ export default async (mina,{getUser,setUser}) => {
     }else {
       if (userCookie.value) {
         // request account is important to keep the wallet connection else it will return for connection warning
+        try {
         await mina.value.requestAccounts();
         user.accountAddress = userCookie.value
+        } catch (e) {
+          console.log("verify your wallet connection >>",e);
+        }
       }else {
         user.accountAddress = null;
       }
@@ -83,11 +87,11 @@ export default async (mina,{getUser,setUser}) => {
         }
       } catch (err) {
         if (err.code === 4001){
-          alert("Please create an account in your Auro wallet");
+          alert("You need to verified Auro wallet");
         }
       }
     } else {
-      alert("you need auro wallet to use this app")
+      alert("You need auro wallet to use this app")
     }
   }
 

@@ -5,6 +5,7 @@ export default createStore({
     cookieName:process.env.cookieName,
     loading: {state:false,message:"",duration:false},
     user:{
+      isCompiled:false,
       accountAddress:null,
       wallet:{
         isAuro:false,

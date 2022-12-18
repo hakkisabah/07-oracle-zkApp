@@ -1,11 +1,13 @@
 import { useStore } from "vuex";
 import useCommonComputed from "./computed/common";
+
 export default () => {
   const store = useStore();
 
   // computed
   const { getOverlay, getTxns } = useCommonComputed(store);
   // methods
+
   const setOverlay = (val) => {
     store.commit('setLoading', val)
     if (val.duration) {

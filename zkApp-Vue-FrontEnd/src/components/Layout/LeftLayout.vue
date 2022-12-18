@@ -20,8 +20,8 @@ const props = defineProps({
     >
     <v-card-title>txns :</v-card-title>
     <div v-if="commons.getTxns.value.length < 1">not yet</div>
-    <div v-else v-for="t in commons.getTxns.value" :key="t" >
-      <a :href="`https://berkeley.minaexplorer.com/transaction/${t.txn}`">{{t.txn.slice(0,6)}}...</a>
+    <div v-else v-for="t in commons.getTxns.value" :key="t.txn" >
+      <a :href="`https://berkeley.minaexplorer.com/transaction/${t.txn}`" target="_blank">{{t.txn.slice(0,6)}}...</a>
     </div>
     </v-sheet>
   </v-col>

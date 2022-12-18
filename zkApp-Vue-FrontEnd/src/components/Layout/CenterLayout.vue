@@ -59,7 +59,7 @@ const ORACLE_URL = "https://3zfeebofnm6yarifpd6jb7hkd40dkxtt.lambda-url.eu-centr
 
 onMounted(async () => {
   try {
-    setOverlay({ state: true, message: "Please wait.. app loading.." })
+    setOverlay({ state: true, message: "Please wait.. app loading.."});
     await sleep(1500)
     await isReady;
     mina.value = window.mina
@@ -81,9 +81,12 @@ onMounted(async () => {
 const compile = async () => {
   try {
     fetchAccount({ publicKey: zkAppAddress })
-    setOverlay({ state: true, message: "Please wait.. compiling.." })
+    setOverlay({ state: true, message: "Please wait.. compiling.. getting be patient.." })
+    const user = getUser.value;
     await sleep(1500)
     await OracleExample.compile();
+    user.isCompiled = true;
+    setUser(user);
     setOverlay({ state: false, message: "" })
   } catch (error) {
     console.log("COMPILE ERROR >> ", error)
@@ -108,7 +111,7 @@ const createTransaction = async (userId) => {
     const creditScore = Field(data.data.creditScore);
     const signature = Signature.fromJSON(data.signature);
 
-    setOverlay({ state: true, message: "Please wait.. verifiying.." })
+    setOverlay({ state: true, message: "Please wait.. sending transaction to contract.." })
     zkApp.value = new OracleExample(PublicKey.fromBase58(zkAppAddress));
     await sleep(1500)
     transaction.value = await Mina.transaction(
@@ -120,6 +123,7 @@ const createTransaction = async (userId) => {
           signature,
         )
       })
+    setOverlay({ state: true, message: "Please wait.. proving data...." })
     console.log("txn before prove", transaction.value)
     await sleep(500)
     await transaction.value.prove();
@@ -133,6 +137,7 @@ const createTransaction = async (userId) => {
 
     console.log("partiesJsonUpdate >>", partiesJsonUpdate)
 
+    setOverlay({ state: true, message: "Please wait.. waiting user wallet interactions.." })
     let partyResult = await mina.value.sendTransaction({
       transaction: partiesJsonUpdate,
       feePayer: {
@@ -181,12 +186,14 @@ const createTransaction = async (userId) => {
       <v-row>
         <v-col align-self="center">
           <v-banner lines="three" icon="$info" color="info" class="my-4">
-            <v-banner-text>
+            <v-banner-text v-if="!getUser.isCompiled">
               Compile mandatory not required to this app processes but if any need scenario click the compile button :)
             </v-banner-text>
-
+            <v-banner-text v-else>
+              Compiled successfully ! :)
+            </v-banner-text>
             <template v-slot:actions>
-              <v-btn @click="compile()">compile</v-btn>
+              <v-btn :disabled="getUser.isCompiled" @click="compile()">{{getUser.isCompiled ? 'compiled !':'compile'}}</v-btn>
             </template>
           </v-banner>
         </v-col>
@@ -199,10 +206,23 @@ const createTransaction = async (userId) => {
       </v-row>
       <v-row class="mt-10">
         <v-col align-self="center">
-          <v-btn @click="createTransaction(1)">send transaction for user 1</v-btn>
+          <v-btn @click="getUser.accountAddress ? createTransaction(1): ''">{{ getUser.accountAddress ? 'send transaction for user 1' : 'Need wallet connection' }}
+            <v-tooltip
+              v-if="!getUser.accountAddress"
+              color="warning"
+              activator="parent"
+              location="top"
+            >Need Wallet Connection</v-tooltip>
+          </v-btn>
         </v-col>
         <v-col align-self="center">
-          <v-btn @click="createTransaction(2)">send transaction for user 2</v-btn>
+          <v-btn @click="getUser.accountAddress ? createTransaction(2) : ''">{{ getUser.accountAddress ?  'send transaction for user 2' : 'Need wallet connection' }}
+            <v-tooltip
+              v-if="!getUser.accountAddress"
+              activator="parent"
+              location="top"
+            >Need Wallet Connection</v-tooltip>
+          </v-btn>
         </v-col>
       </v-row>
       <v-row class="mt-10">
