@@ -70,8 +70,9 @@ onMounted(async () => {
     setGraphqlEndpoint(graphqlEndpoint);
     let Berkeley = Mina.Network(graphqlEndpoint);
     Mina.setActiveInstance(Berkeley);
-    setOverlay({ state: false, message: "" })
+    setOverlay({ state: true, message: "Please wait.. check Auro wallet.."});
     await walletMethods.value.checkAuro();
+    setOverlay({ state: false, message: "" })
   } catch (e) {
     console.log("LOAD ERROR > ", e)
     setOverlay({ state: true, message: "Getting error while page loading ! check the error in console !" })
